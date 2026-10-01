@@ -59,4 +59,6 @@ const GALLERY_ITEMS = [
   { text: "Warwick", file: "images/warwick.png" },
   { text: "Xayah", file: "images/xayah.png" },
   { text: "Yunara", file: "images/yunara.png" },
+  { text: "Veigar", file: "images/veigar.png" },
+  { text: "Olaf", file: "images/olaf.png" },
 ];
