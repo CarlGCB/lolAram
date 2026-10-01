@@ -29,13 +29,19 @@ function crearTarjeta(item, consulta, delayMs) {
   const imgWrap = document.createElement("div");
   imgWrap.className = "card-image-wrap";
 
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "card-image-btn";
+  btn.setAttribute("aria-label", `Ampliar imagen de ${item.text}`);
+
   const img = document.createElement("img");
   img.src = item.file;
   img.alt = item.text;
   img.loading = "lazy";
   img.onerror = () => card.classList.add("is-broken");
 
-  imgWrap.appendChild(img);
+  btn.appendChild(img);
+  imgWrap.appendChild(btn);
   card.appendChild(label);
   card.appendChild(imgWrap);
   return card;
@@ -47,6 +53,37 @@ function iniciarGaleria(items) {
   const contador = document.getElementById("contador");
   const estadoVacio = document.getElementById("estado-vacio");
   const consultaVacia = document.getElementById("consulta-vacia");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxClose = document.getElementById("lightbox-close");
+
+  function abrirLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function cerrarLightbox() {
+    lightbox.hidden = true;
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  grid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".card-image-btn");
+    if (!btn) return;
+    const img = btn.querySelector("img");
+    abrirLightbox(img.src, img.alt);
+  });
+
+  lightboxClose.addEventListener("click", cerrarLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) cerrarLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !lightbox.hidden) cerrarLightbox();
+  });
 
   function render(consultaCruda) {
     const consulta = consultaCruda.trim();
