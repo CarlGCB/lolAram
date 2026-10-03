@@ -63,7 +63,6 @@ const GALLERY_ITEMS = [
   { text: "Olaf", file: "images/olaf.png" },
   { text: "Mel", file: "images/mel.png" },
   { text: "Master Yi", file: "images/master_yi.png" },
-  { text: "Pantheon", file: "images/pantheon.png" },
   { text: "Zed", file: "images/zed.png" },
   { text: "Tryndamere", file: "images/tryndamere.png" },
   { text: "Pantheon", file: "images/pantheon.png" },
